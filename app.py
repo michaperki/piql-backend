@@ -19,4 +19,6 @@ app.register_blueprint(auth_bp, url_prefix='/auth')  # Adjust the URL prefix as 
 # Additional configuration and extensions can be added here
 
 if __name__ == '__main__':
-    app.run()
+    # Use the port specified by Heroku or default to 5000
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
