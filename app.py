@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import os 
 
 # Create a Flask application instance
 app = Flask(__name__)
