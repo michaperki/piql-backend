@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os 
+from flask_migrate import Migrate
 
 # Create a Flask application instance
 app = Flask(__name__)
@@ -11,6 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 # Initialize SQLAlchemy for database operations
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 # Import and register blueprints
 from routes.auth import auth_bp
