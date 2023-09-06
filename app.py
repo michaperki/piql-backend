@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # Configuration (You can use environment variables for sensitive data)
 app.config['SECRET_KEY'] = 'your-secret-key'  # Replace with a strong secret key
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 
 # Initialize SQLAlchemy for database operations
 db = SQLAlchemy(app)
