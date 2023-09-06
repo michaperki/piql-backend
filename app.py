@@ -1,23 +1,22 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from routes.main import main_bp
 
-db = SQLAlchemy()
+# Create a Flask application instance
+app = Flask(__name__)
 
-def create_app():
-    app = Flask(__name__)
+# Configuration (You can use environment variables for sensitive data)
+app.config['SECRET_KEY'] = 'your-secret-key'  # Replace with a strong secret key
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///your-database-file.db'  # Use SQLite for simplicity
 
-    # Load configuration from a config file or environment variables
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+# Initialize SQLAlchemy for database operations
+db = SQLAlchemy(app)
 
-    # Initialize database
-    db.init_app(app)
+# Import and register blueprints
+from routes.auth import auth_bp
 
-    # Register the main blueprint
-    app.register_blueprint(main_bp)
+app.register_blueprint(auth_bp, url_prefix='/auth')  # Adjust the URL prefix as needed
 
-    return app
+# Additional configuration and extensions can be added here
 
 if __name__ == '__main__':
-    app = create_app()
     app.run()
