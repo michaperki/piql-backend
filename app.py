@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Configuration (You can use environment variables for sensitive data)
 app.config['SECRET_KEY'] = 'your-secret-key'  # Replace with a strong secret key
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///your-database-file.db'  # Use SQLite for simplicity
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 # Initialize SQLAlchemy for database operations
 db = SQLAlchemy(app)
